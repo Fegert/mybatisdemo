@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 根标签 -->
+<configuration>
+    <!--properties[属性]：这里用来隐藏需要提供给MySQL的静态变量username和password-->
+<properties resource="config.properties">
+    <property name="driver" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"/>
+</properties>
+    <environments default="test">
+        <environment id="test">
+            <transactionManager type="JDBC">
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username:root}"/>
+                <!-- 如果属性 'username' 没有被配置，'username' 属性的值将为 'root' -->
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mappers/MyMapper.xml"/>
+    </mappers>
+</configuration>
